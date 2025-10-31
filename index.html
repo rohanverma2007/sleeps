@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sleeps Calculator</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: #f0f8ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+        input, button {
+            font-size: 1rem;
+            padding: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>how many sleeps till your event?</h1>
+    <form id="eventForm">
+        <input type="text" id="eventName" placeholder="Event name" required>
+        <input type="date" id="eventDate" required>
+        <button type="submit">Go</button>
+    </form>
+    <script>
+        document.getElementById('eventForm').onsubmit = function(e) {
+            e.preventDefault();
+            const event = encodeURIComponent(document.getElementById('eventName').value);
+            const date = document.getElementById('eventDate').value;
+            if (event && date) {
+                const rand = Math.random().toString(36).substr(2, 10);
+                window.location.href = `sleeps.html?date=${date}&event=${event}&id=${rand}`;
+            }
+        };
+    </script>
+</body>
+</html>

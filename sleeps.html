@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sleeps Result</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: #f0f8ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .result {
+            font-size: 2rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="result" id="result"></div>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const eventName = decodeURIComponent(params.get('event') || '');
+        const eventDate = params.get('date');
+        if (eventName && eventDate) {
+            const today = new Date();
+            const target = new Date(eventDate);
+            const diff = Math.ceil((target - today) / (1000 * 60 * 60 * 24));
+            document.getElementById('result').textContent =
+                diff >= 0
+                    ? `${diff} sleeps till ${eventName} 💤`
+                    : `The event ${eventName} has already passed.`;
+        } else {
+            document.getElementById('result').textContent = "Invalid event or date.";
+        }
+    </script>
+</body>
+</html>
